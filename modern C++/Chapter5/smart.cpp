@@ -70,7 +70,7 @@ int main() {
         std::unique_ptr<int> pointer = std::make_unique<int>(10);  // make_unique 从 C++14 引入
         // std::unique_ptr<int> pointer2 = pointer;                    // 非法
 
-        //既然是独占，换句话说就是不可复制。但是可以利用 std::move 将其转移给其他的 unique_ptr
+        // 既然是独占，换句话说就是不可复制。但是可以利用 std::move 将其转移给其他的 unique_ptr
         struct Foo {
             Foo() { std::cout << "Foo::Foo" << std::endl; }
             ~Foo() { std::cout << "Foo::~Foo" << std::endl; }
@@ -149,27 +149,27 @@ int main() {
             std::cout << "b.use_count = " << b.use_count() << std::endl;
             std::cout << "a.use_count = " << a.use_count() << std::endl;
             std::cout << "before a.reset()\n";
-            a.reset();  //此时A已销毁
+            a.reset();  // 此时A已销毁
             std::cout << "after a.reset()\n";
             std::cout << "b.use_count = " << b.use_count() << std::endl;
             std::cout << "a.use_count = " << a.use_count() << std::endl;
-            a->info();  //可以调用，函数独立于实体
+            a->info();  // 可以调用，函数独立于实体
             // a->pointer->info();  //不可以调用，pointer已不存在
             std::cout << "before b.reset()\n";
-            b.reset();  //此时A已销毁
+            b.reset();  // 此时A已销毁
             std::cout << "after b.reset()\n";
             std::cout << "before block end\n";
         }
         std::cout << "block end\n";
     }
 
-    //现代 C++ 将这项技术引进，在一定程度上消除了 new/delete 的滥用，是一种更加成熟的编程范式
+    // 现代 C++ 将这项技术引进，在一定程度上消除了 new/delete 的滥用，是一种更加成熟的编程范式
 
-    //问题
-    // https://github.com/changkun/modern-cpp-tutorial/blob/master/assets/figures/pointers2.png
-    //当a析构之后，A的引用变为了0（B中的pointer为弱指针，不增加引用计数），此时A会自动析构
-    //由于析构是调用delete函数，会先析构（调用析构函数），再释放内存
-    //当A析构时，发现成员量里有一个，shared_ptr(强引用)指向B，（这个无所谓吧，它指向别人，它析构会让别人的引用计数减一）
-    //此时A可以析构？？还是不可以？？
+    // 问题
+    //  https://github.com/changkun/modern-cpp-tutorial/blob/master/assets/figures/pointers2.png
+    // 当a析构之后，A的引用变为了0（B中的pointer为弱指针，不增加引用计数），此时A会自动析构
+    // 由于析构是调用delete函数，会先析构（调用析构函数），再释放内存
+    // 当A析构时，发现成员量里有一个，shared_ptr(强引用)指向B，（这个无所谓吧，它指向别人，它析构会让别人的引用计数减一）
+    // 此时A可以析构？？还是不可以？？
     return 0;
 }
