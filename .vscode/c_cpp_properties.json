@@ -2,12 +2,18 @@
     "configurations": [
         {
             "name": "Linux",
-            "includePath": ["${workspaceFolder}/**"],
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
             "defines": [],
             "compilerPath": "/usr/bin/g++",
             "cStandard": "gnu11",
-            "cppStandard": "gnu++14",
-            "intelliSenseMode": "linux-gcc-x64"
+            "cppStandard": "gnu++11",
+            "intelliSenseMode": "linux-gcc-x64",
+            "compilerArgs": [
+                "-std=c++11"
+            ],
+            "configurationProvider": "ms-vscode.makefile-tools"
         }
     ],
     "version": 4
