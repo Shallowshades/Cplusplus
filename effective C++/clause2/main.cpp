@@ -4,9 +4,9 @@
  * @brief 尽量使用const,enum,inline替换#define
  * @version 0.1
  * @date 2023-01-18
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 #include <iostream>
 #include <string>
@@ -14,11 +14,11 @@
 using namespace std;
 
 #define ASPECT_RATIO 1.653 //报错的时候只有1.653，根本不知道哪里出了问题
-const double AspectRatio = 1.653; 
+const double AspectRatio = 1.653;
 const char* const authorName1 = "Scott Meyers"; //较次 两次const分别限定指针和内容
 const std::string authorName2("Scott Meyers");  //较好
 
-class GamePlayer1{
+class GamePlayer1 {
 private:
     static const int NumTurns = 5; //constant declaration
     int scores[NumTurns];
@@ -26,9 +26,9 @@ private:
 
 const int GamePlayer1::NumTurns;
 
-class GamePlayer2{
+class GamePlayer2 {
 private:
-    enum {NumTurns = 5}; //"the enum hack",令NumTurns成为5的一个记号名称
+    enum { NumTurns = 5 }; //"the enum hack",令NumTurns成为5的一个记号名称
     int scores[NumTurns];
 };
 
@@ -40,26 +40,26 @@ private:
 //function-like macro
 #define CALL_WITH_MAX(a,b) f((a)>(b)?(a):(b)) 
 
-void f(int val){
+void f(int val) {
     std::cout << val << std::endl;
 }
 
 //template
 //包含在头文件中，加inline，否则报重复的错误
 template<typename T>
-inline void callWithMax(const T& a, const T& b){
-    f(a>b?a:b);
+inline void callWithMax(const T& a, const T& b) {
+    f(a > b ? a : b);
 }
 
-int main(){
+int main() {
 
     int a = 5, b = 0;
-    CALL_WITH_MAX(++a,b); //f((++a)>(b)?(++a):(b))
-    CALL_WITH_MAX(++a,b+10); //f((++a)>(b+10)>(++a):(b+10))
+    CALL_WITH_MAX(++a, b); //f((++a)>(b)?(++a):(b))
+    CALL_WITH_MAX(++a, b + 10); //f((++a)>(b+10)>(++a):(b+10))
 
     a = 5, b = 0;
     callWithMax(++a, b);
-    callWithMax(++a, b+10);
+    callWithMax(++a, b + 10);
 
     return 0;
 }
