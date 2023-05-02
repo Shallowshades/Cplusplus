@@ -12,7 +12,7 @@ public:
     int b;
 };
 
-class C : public A, public B {
+class C: public A, public B {
 public:
     int c;
 };
@@ -27,7 +27,7 @@ public:
     virtual void print() { std::cout << "I" << std::endl; }
 };
 
-class J : public H, public I {
+class J: public H, public I {
 public:
     virtual void print() override { std::cout << "J" << std::endl; }
 };
@@ -37,14 +37,14 @@ int main() {
     // 用于基本内置数据类型之间的转换
     // 转换结果可能存在截断性，这种转换的安全性要由开发人员来保证
     {
-        char  type_char       = 'A';
-        float type_float      = type_char;                      // 隐式转换也可以
+        char  type_char = 'A';
+        float type_float = type_char;                      // 隐式转换也可以
         float type_float_cast = static_cast<float>(type_char);  // 显式地使用static_cast进行强制类型转换
         cout << type_char << endl;
         cout << type_float << endl;
 
-        double type_double    = 1.23;
-        long   type_long      = type_double;                     // 隐式转换也可以
+        double type_double = 1.23;
+        long   type_long = type_double;                     // 隐式转换也可以
         long   type_long_cast = static_cast<long>(type_double);  // 显式地使用static_cast进行强制类型转换
         cout << type_double << endl;
         cout << type_long << endl;
@@ -64,7 +64,7 @@ int main() {
 
         void* void_ptr = &type_int;  // 任何指针都可以隐式转换为void*
         // float* float_ptr3 = void_ptr;                       // void* -> float* 隐式转换无效
-        float* float_ptr4 = static_cast<float*>(void_ptr);  // void* -> float* 使用static_cast转换成功
+        float* float_ptr4 = static_cast<float*>(void_ptr);   // void* -> float* 使用static_cast转换成功
         // char*  char_ptr3  = void_ptr;                       // void* -> char* 隐式转换无效
         char* char_ptr4 = static_cast<char*>(void_ptr);  // void* -> char* 使用static_cast转换成功
         cout << "void_ptr = " << void_ptr << endl;
