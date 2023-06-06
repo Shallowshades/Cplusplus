@@ -1,15 +1,23 @@
 {
-  "configurations": [
-    {
-      "name": "GCC",
-      "includePath": ["${workspaceFolder}/**"],
-      "defines": ["_DEBUG", "UNICODE", "_UNICODE"],
-      "windowsSdkVersion": "10.0.19041.0",
-      "compilerPath": "C:/Program Files/mingw64/bin/g++.exe",
-      "cStandard": "c11",
-      "cppStandard": "c++23",
-      "intelliSenseMode": "${default}"
-    }
-  ],
-  "version": 4
+    "configurations": [
+        {
+            "name": "GCC",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/Program Files/boost/boost_1_78_0"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.19041.0",
+            "compilerPath": "C:/Program Files/mingw64/bin/g++.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++23",
+            "intelliSenseMode": "${default}",
+            "configurationProvider": "ms-vscode.makefile-tools"
+        }
+    ],
+    "version": 4
 }
