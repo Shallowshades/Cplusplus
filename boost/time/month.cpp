@@ -22,10 +22,11 @@ void paint_monthday(const date_period& dp);
 int main() {
 
     //打印当年的月历
-    for (date d(2023, 1, 1); d.year() < 2024; d += months(1)) {
+    for (date d(day_clock::local_day()); d.year() < 2024; d += months(1)) {
         cout << "========== " << d.month() << " ==========" << endl;
         paint(d);
     }
+    system("pause");
     return 0;
 }
 
