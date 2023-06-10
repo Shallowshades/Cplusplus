@@ -11,7 +11,7 @@
 #include <iostream>
 #include <algorithm>
 
-#undef BOOST_DATE_TIME_OPTIONAL_GREGORIAN_TYPES		//使weeks,months,years无效
+#undef BOOST_DATE_TIME_OPTIONAL_GREGORIAN_TYPES		//使weeks,months,years无效, days有效
 #define DATE_TIME_NO_DEFAULT_CONSTRUCTOR			//禁止date的默认构造函数
 #include <boost/date_time/gregorian/gregorian.hpp>
 

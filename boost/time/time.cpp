@@ -142,10 +142,11 @@ int main() {
         cout << p2 << endl;
     }
 
+    //时钟类
     {
         ptime p1 = second_clock::local_time();              //精确到秒  本地时间
         ptime p2 = second_clock::universal_time();          //精确到秒  UTC时间
-        ptime p3 = microsec_clock::local_time();              //精确到微秒
+        ptime p3 = microsec_clock::local_time();             //精确到微秒
         ptime p4 = microsec_clock::universal_time();        //
         cout << p1 << endl;
         cout << p2 << endl;
@@ -188,6 +189,41 @@ int main() {
         cout << to_simple_string(p) << endl;
         cout << to_iso_string(p) << endl;
         cout << to_iso_extended_string(p) << endl;
+    }
+
+    //ptime <==> tm
+    {
+        ptime p(date(2017, 5, 30), hours(14));
+        tm t = to_tm(p);
+        cout << t.tm_year << endl;
+        cout << t.tm_year << endl;
+        ptime p2 = from_time_t(std::time(0));
+        cout << p.date() << endl;
+        cout << day_clock::local_day() << endl;
+        cout << to_time_t(p2) << endl;
+    }
+
+    //时间区间
+    {
+        ptime p(date(2017, 1, 1), hours(12));
+        time_period tp1(p, hours(8));
+        time_period tp2(p + hours(8), hours(1));
+        cout << tp1 << endl;
+        cout << tp2 << endl;
+        cout << boolalpha << (!tp1.intersects(tp2)) << endl;
+
+        tp1.shift(hours(1));
+        cout << tp1 << endl;
+        tp2.expand(hours(2));
+        cout << tp2 << endl;
+    }
+
+    //时间迭代器
+    {
+        ptime p(date(2017, 5, 31), hours(10));
+        for (time_iterator t_iter(p, minutes(10)); t_iter < p + hours(1); ++t_iter) {
+            cout << *t_iter << endl;
+        }
     }
 
     return 0;
