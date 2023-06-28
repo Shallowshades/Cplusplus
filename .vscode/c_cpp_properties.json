@@ -4,7 +4,7 @@
             "name": "GCC",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:/Program Files/boost/boost_1_78_0"
+                "D:/code/library/boost_1_82_0"
             ],
             "defines": [
                 "_DEBUG",
@@ -12,9 +12,9 @@
                 "_UNICODE"
             ],
             "windowsSdkVersion": "10.0.19041.0",
-            "compilerPath": "C:/Program Files/mingw64/bin/g++.exe",
+            "compilerPath": "C:/w64devkit/bin/g++.exe",
             "cStandard": "c11",
-            "cppStandard": "c++23",
+            "cppStandard": "c++14",
             "intelliSenseMode": "${default}",
             "configurationProvider": "ms-vscode.makefile-tools"
         }

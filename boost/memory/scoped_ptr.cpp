@@ -13,7 +13,7 @@
 #include <string>
 #include <memory>
 
-#include <boost/scoped_ptr.hpp>
+#include <boost/smart_ptr/scoped_ptr.hpp>
 #include <boost/smart_ptr/make_unique.hpp>
 
 using namespace std;

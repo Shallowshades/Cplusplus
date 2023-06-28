@@ -78,7 +78,24 @@
     "charconv": "cpp",
     "source_location": "cpp",
     "rope": "cpp",
-    "slist": "cpp"
+    "slist": "cpp",
+    "barrier": "cpp",
+    "bit": "cpp",
+    "compare": "cpp",
+    "concepts": "cpp",
+    "coroutine": "cpp",
+    "expected": "cpp",
+    "format": "cpp",
+    "latch": "cpp",
+    "numbers": "cpp",
+    "ranges": "cpp",
+    "semaphore": "cpp",
+    "span": "cpp",
+    "spanstream": "cpp",
+    "stacktrace": "cpp",
+    "stdfloat": "cpp",
+    "stop_token": "cpp",
+    "syncstream": "cpp"
   },
   "C_Cpp.errorSquiggles": "enabled"
 }
