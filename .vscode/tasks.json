@@ -12,7 +12,7 @@
         "${fileDirname}/${fileBasenameNoExtension}",
         "-I",
         "C:/Program Files/boost/boost_1_78_0/boost",
-        "-std=c++11"
+        "-std=c++17"
       ],
       "options": {
         "cwd": "${fileDirname}"
