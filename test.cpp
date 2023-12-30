@@ -34,3 +34,8 @@ int main() {
 
     std::cout << boolalpha << (wstr == inwstr) << std::endl;
 }
+
+/*
+    210 180 150
+    120 90 60
+*/
