@@ -9,58 +9,64 @@
  *
  */
 
-#include <vector>
 #include <thread>
-#include <queue>
+#include <algorithm>
 #include <time.h>
 #include <iostream>
-#include <future>
+#include "heap.h"
 
 using namespace std;
 
-const size_t THREAD_NUMBER = 1000;
+const size_t THREAD_NUMBER = 50;
+const size_t MAX_NUMBER = 1e9;
+const size_t ANSWER_NUMBER = 1000;
 
-priority_queue<int, vector<int>, greater<int>> q[THREAD_NUMBER];
+heap* q[THREAD_NUMBER];
 
 void deal(int start, int end, int index) {
-    for (int i = start;i < end;++i) {
-        q[index].push(i);
-        if (q[index].size() > THREAD_NUMBER) {
-            //cout << q.top() << endl;
-            q[index].pop();
-        }
+    for (int i = start + ANSWER_NUMBER; i < end; ++i) {
+        q[index]->replace_top(i);
     }
 }
 
 int main() {
 
-    clock_t Time_Colck_Start, Time_Colck_End; //适合存储处理器时间的类型
-    Time_Colck_Start = clock();//处理器启动时间
+    clock_t Time_Colck_Start, Time_Colck_End;
+    Time_Colck_Start = clock();
 
     //deal
-    std::future<void> f[THREAD_NUMBER];
-    for (int i = 0;i < THREAD_NUMBER;++i) {
-        f[i] = std::async(std::launch::async, deal, i * 1e6, (i + 1) * 1e6, i);
+    std::thread* t[THREAD_NUMBER];
+    for (int i = 0; i < THREAD_NUMBER; ++i) {
+        q[i] = new heap(static_cast<unsigned long long>(i) * MAX_NUMBER / THREAD_NUMBER);
+        t[i] = new thread(deal, static_cast<unsigned long long>(i) * MAX_NUMBER / THREAD_NUMBER, (static_cast<unsigned long long>(i) + 1) * MAX_NUMBER / THREAD_NUMBER, i);
     }
+    for (int i = 0; i < THREAD_NUMBER; ++i) {
+        if (t[i]->joinable())
+            t[i]->join();
 
-    for (int i = 0;i < THREAD_NUMBER;++i) {
-        f[i].wait();
+        delete t[i];
     }
-
-    for (int i = 1;i < THREAD_NUMBER;++i) {
-        while (!q[i].empty()) {
-            q[0].push(q[i].top());
-            q[i].pop();
+    for (int i = 1; i < THREAD_NUMBER; ++i) {
+        for (int j = 0; j < ANSWER_NUMBER; ++j) {
+            q[0]->replace_top(q[i]->mArray[j]);
         }
     }
 
-    Time_Colck_End = clock(); //处理器结束时间
+    Time_Colck_End = clock();
     cout << (1.0 * Time_Colck_End - Time_Colck_Start) / CLOCKS_PER_SEC << "s\n"; //时间差
-
-    while (!q[0].empty()) {
-        cout << q[0].top() << endl;
-        q[0].pop();
+    std::sort(q[0]->mArray, q[0]->mArray + ANSWER_NUMBER);
+    for (int i = 0; i < ANSWER_NUMBER; ++i) {
+        std::cout << q[0]->mArray[i] << std::endl;
     }
+
+    /*
+    * 1.重复释放
+    * 2.作用域
+    * 3.修改了数组前的标记（数组长度）
+    */
+    /*for (int i = 0; i < THREAD_NUMBER; ++i) {
+        delete q[i];
+    }*/
 
     return 0;
 }
