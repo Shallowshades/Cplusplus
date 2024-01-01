@@ -14,7 +14,7 @@
 #include <iostream>
 
 bool less(int a, int b) { return a < b ? true : false; }
-const size_t SIZE = 1000;
+const size_t SIZE = 1024;
 class heap {
 public:
     heap(int start) {

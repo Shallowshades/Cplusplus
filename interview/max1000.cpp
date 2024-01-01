@@ -19,7 +19,7 @@ using namespace std;
 
 const size_t THREAD_NUMBER = 50;
 const size_t MAX_NUMBER = 1e9;
-const size_t ANSWER_NUMBER = 1000;
+const size_t ANSWER_NUMBER = 1024;
 
 heap* q[THREAD_NUMBER];
 
@@ -55,7 +55,7 @@ int main() {
     Time_Colck_End = clock();
     cout << (1.0 * Time_Colck_End - Time_Colck_Start) / CLOCKS_PER_SEC << "s\n"; //时间差
     std::sort(q[0]->mArray, q[0]->mArray + ANSWER_NUMBER);
-    for (int i = 0; i < ANSWER_NUMBER; ++i) {
+    for (int i = 24; i < ANSWER_NUMBER; ++i) {
         std::cout << q[0]->mArray[i] << std::endl;
     }
 
