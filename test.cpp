@@ -2,6 +2,7 @@
 #include <locale>
 #include <codecvt>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -21,18 +22,24 @@ inline std::string to_byte_string(const std::wstring& input)
 
 int main() {
     wstring wstr = L"你好-世界";
-    string str; cin >> str;
+    // string str; cin >> str;
 
-    wstring inwstr;
-    for (int i = 0; i < str.size(); ++i) {
-        wchar_t ch = str[i];
-        if (ch > 127)
-            ch = (ch << 16) + str[i + 1];
+    // wstring inwstr;
+    // for (int i = 0; i < str.size(); ++i) {
+    //     wchar_t ch = str[i];
+    //     if (ch > 127)
+    //         ch = (ch << 16) + str[i + 1];
 
-        inwstr.push_back(ch);
+    //     inwstr.push_back(ch);
+    // }
+
+    // std::cout << boolalpha << (wstr == inwstr) << std::endl;
+
+    std::vector<int> v;
+    for (int i = 0;i < 1000;++i) {
+        v.push_back(i);
+        std::cout << v.capacity() << std::endl;
     }
-
-    std::cout << boolalpha << (wstr == inwstr) << std::endl;
 }
 
 /*
