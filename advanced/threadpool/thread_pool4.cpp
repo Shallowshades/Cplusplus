@@ -6,6 +6,7 @@
 #include <functional>
 #include <chrono>
 #include <sstream>
+#include <variant>
 
 using namespace std;
 
@@ -23,7 +24,7 @@ public:
 
 private:
     vector<thread*> threads;
-    queue<function<void()>> tasks; // 参数个数任意 返回类型任意（接收时有没有问题？）
+    queue<function<void()>> tasks; // 参数个数任意 返回类型任意（接收时有没有问题？） 
     mutex mtx;
     condition_variable cv;
     bool stop;
