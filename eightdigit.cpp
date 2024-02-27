@@ -4,7 +4,7 @@
 #include <set>
 #include <queue>
 #include <thread>
-#include <boost/optional.hpp>
+#include <optional>
 
 using namespace std;
 
@@ -31,8 +31,8 @@ public:
 
 const matrix matrix::m_matGoal = {
     {1, 2, 3},
-    {4, 0, 5},
-    {6, 7, 8}
+    {4, 5, 6},
+    {7, 8, 0}
 };
 
 matrix::matrix(const matrix& m) {
@@ -121,15 +121,15 @@ void print(const status& s) {
     }
 }
 
-boost::optional<int> star(const status& start) {
-    boost::optional<int> result;
+std::optional<int> star(const status& start) {
+    std::optional<int> result;
     set<matrix> s;
     priority_queue<status> q;
     q.push(start);
     while (!q.empty()) {
         auto x = q.top(); q.pop();
         if (!x.m.evaluate()) {
-            print(x);
+            //print(x);
             result = x.t;
             break;
         }
@@ -177,12 +177,20 @@ int inversion(const matrix& m) {
 
 int main() {
 
-    status start;
-    std::cin >> start.m;
-    if ((inversion(start.m) & 1) != (inversion(matrix::m_matGoal) & 1))
-        cout << "Don't have ansner!!\n";
-    start.t = 0;
-    if (star(start).value_or(-1) == -1) {
-        std::cout << "Don't have ansner!!\n";
+    int t; cin >> t;
+    while (t--) {
+        status start;
+        std::cin >> start.m;
+        if ((inversion(start.m) & 1) != (inversion(matrix::m_matGoal) & 1))
+            cout << "No Solution!\n";
+        else {
+            start.t = 0;
+            int ans = star(start).value_or(-1);
+            if (ans == -1)
+                std::cout << "No Solution!\n";
+            else
+                std::cout << ans << std::endl;
+        }
     }
+    return 0;
 }
