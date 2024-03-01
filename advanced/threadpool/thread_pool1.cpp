@@ -22,11 +22,11 @@ class thread_pool {
 public:
     thread_pool(int threads_num) : stop(false) {
         for (int i = 0;i < threads_num; ++i) {
-            threads.emplace_back([this] {   //没有一次性开完所有线程， not good
+            threads.emplace_back([this] {   //very good
                 while (true) {
                     function<void()> task;
 
-                    //------
+                    //------ 
                     {
                         unique_lock<mutex> lock(this->mtx); // 局部锁
                         this->cv.wait(lock, [this] {return this->stop || !this->tasks.empty(); });
@@ -78,4 +78,7 @@ int main() {
     pool.enqueue(func);
     pool.enqueue(f);
     pool.enqueue([]() {std::cout << "try once!!\n";}); //部分回车没有输出
+
+    for (int i = 0; i < 20; ++i)
+        pool.enqueue(func);
 }
