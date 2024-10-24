@@ -24,6 +24,21 @@ void test2(volatile const int& val) {
     const_cast<int&>(val)++;
 }
 
+class animal {
+public:
+    animal(int age = 1) : m_iAge(age) {}
+    ~animal() = default;
+
+    int age() const { ++counts; return m_iAge; }
+    void age(int val) { m_iAge = val; }
+
+    int count() const { return counts; }
+
+private:
+    int m_iAge = 18;
+    mutable int counts = 0;
+};
+
 int main() {
     int a = 0;
     const int b = 0;
@@ -50,6 +65,14 @@ int main() {
     int c = 1;
     test1(c);
     std::cout << c << std::endl;
+
+    volatile const int d = 1;
+    test2(d);
+    std::cout << d << std::endl;
+
+    animal cat;
+    std::cout << cat.age() << std::endl;
+    std::cout << cat.count() << std::endl;
 
     return 0;
 }

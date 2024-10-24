@@ -201,3 +201,14 @@ void incNumber(int num) {
         b += 1;
     }
 }
+
+/*
+memory_order_relaxed
+唯一的要求是在同一线程中，对同一原子变量的访问不可以被重排，不同的原子变量的操作顺序是可以重排的。它不提供任何跨线程的内存顺序保证。
+memory_order_release & memory_order_acquire & memory_order_consume
+Acquire-Release能保证不同线程之间的Synchronizes-With关系，这同时也约束到同一个线程中前后语句的执行顺序。release语句之前的所有变量的读写操作(including non-atomic and relaxed atomic)都对另一个线程中的acquire之后的代码可见。目前memory_order_consume是不建议使用的。
+memory_order_acq_rel
+它结合了memory_order_acquire 和 memory_order_release 的特性，确保了本线程原子操作的读取时能看到其他线程的写入（acquire 语义），并且本线程的写入对其他线程可见（release 语义），主要用于read-modify-write操作，如fetch_sub/add或compare_exchange_strong/weak。
+memory_order_seq_cst
+它满足memory_order_acq_rel的所有特性，除此之外，它强制受影响的内存访问传播到每个CPU核心。它不仅保证了单个原子变量操作的全局顺序，而且保证了所有使用顺序一致性内存序的原子变量之间的操作顺序在所有线程的观测中是一致的。
+*/

@@ -234,7 +234,7 @@ T parallel_accumulate(Iterator first, Iterator last, T init) {
     Iterator block_start = first;
     for (size_t i = 0; i < (num_threads - 1); ++i) {
         Iterator block_end = block_start;
-        std::advance(block_end, block_size);
+        std::advance(block_end, block_size);    // 将Iterator向前移动size距离
         threads[i] = std::thread(accumulate_block<Iterator, T>(), block_start, block_end, std::ref(results[i]));
         block_start = block_end;
     }

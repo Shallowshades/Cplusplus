@@ -38,7 +38,7 @@ public:
     int _b;
 };
 
-typedef uint64_t ptr;
+typedef size_t ptr;
 typedef void (*funcptr)();
 
 int main() {
@@ -62,8 +62,8 @@ int main() {
     printf("b1 vptr addr = %lX\n", *reinterpret_cast<ptr*>(b1));
     printf("d1 vptr addr = %lX\n", *reinterpret_cast<ptr*>(d1));
 
-    uint64_t** vptr = reinterpret_cast<uint64_t**>(b);
-    uint64_t*  vtbl = *vptr;
+    size_t** vptr = reinterpret_cast<size_t**>(b);
+    size_t* vtbl = *vptr;
     for(int i = 0; i < 3; i++) {
         funcptr func = reinterpret_cast<funcptr>(*(vtbl + i));
         func();

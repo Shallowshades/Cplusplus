@@ -60,7 +60,7 @@ memory_pool* memory_pool::createPool(size_t capacity) {
     // 第一个small block和memory pool 连在一起， 不需要单独free
     size_t total_size = sizeof(memory_pool) + sizeof(small_block) + capacity;
     void* tmp = malloc(total_size);
-    memset(tmp, 0, total_size);
+    //memset(tmp, 0, total_size);
 
     memory_pool* pool = (memory_pool*)tmp;
     printf("pool address : %p\n", pool);
