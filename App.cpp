@@ -346,32 +346,6 @@ namespace AutoDrive {
     }
 }
 
-// 内联导入到父命名空间 唯一 否则会造成二义性
-namespace Parent {
-    namespace V1 { void foo() { std::cout << "foo v1.0" << std::endl; } }
-    inline namespace V2 { void foo() { std::cout << "foo v2.0" << std::endl; } }
-}
-
-// 嵌套命名空间
-namespace A::B::C {
-    int foo() { return 5; }
-}
-
-//
-void test() {
-
-    std::cout << "std::numeric_limits<long long>::max() = " << std::numeric_limits<long long>::max() << std::endl;
-    std::cout << "std::numeric_limits<long long>::min() = " << std::numeric_limits<long long>::min() << std::endl;
-    std::cout << "std::numeric_limits<unsigned long long>::max() = " << std::numeric_limits<unsigned long long>::max() << std::endl;
-    std::cout << "std::numeric_limits<unsigned long long>::min() = " << std::numeric_limits<unsigned long long>::min() << std::endl;
-    //std::cout << AutoDrive::AutoDrive() << std::endl;
-
-    char32_t utf32c = U'好';
-    std::cout << utf32c << std::endl;
-
-    Parent::foo();
-}
-
 // 参观园区
 namespace ParkVisitPath {
     const int N = 1e3 + 10;
